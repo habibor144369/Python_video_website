@@ -1,0 +1,78 @@
+{% load embed_video_tags %}
+<!doctype html>
+<html lang="en">
+{% load static %}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+     <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+      <title>My Video</title>
+  <style>
+    .video{
+      width: 1000px;
+    }
+     a {
+    color: #0d6efd;
+    text-decoration: underline;
+    text-decoration: none;
+  }
+  html{
+    scroll-behavior: smooth;
+  }
+  .btn-success {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+    margin-bottom: 6px;
+    font-size: 20px;
+}
+  </style>
+  </head>
+
+  <body>
+    <div class='container'> <br>
+        <h1 class="text-center" style='color:green;'>This Is My Video Website!  
+        <span>Hello, </span> 
+            {% if request.user.is_authenticated %}
+            <span style=color:red;>{{request.user}}</span> 
+            <span><a href="{% url 'logout' %}" class='btn btn-success'>Logout Here!</a></span>
+
+            {% else %}
+            <span><a href="{% url 'login' %}">Login</a></span>
+            {% endif %}
+        </h1>
+        {% if request.user.is_authenticated %}
+        <h4 class='text-center' style='color:green;'>ok done</h4> <br> <br>
+        <h5 class="text-center"><a href="{% url 'index' %}" class='btn btn-success'>Home</a></h5>
+        {% else %}
+        <h5 class='text-center'>Please Login This My Website Here,  And Click My Video Button, First of All Login Here 😃 </h5> 
+        {% endif %}
+    </div> <br> <br> 
+
+    <div class="container">
+      {% for x in video %}
+              <h5 style="color:green;" >{{x.date}} || {{x.time}}</h5>
+              <h3 style="color:green;" > Cption : {{ x.caption }}</h3>
+              <h3 style="color:red;" > Author : {{ request.user }} Rahaman</h3>
+              {% video x.video '950x550' %}  <br> <br> <br> <br>
+      {% endfor %}
+    </div>
+    
+    
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+  
+  </body>
+</html>
